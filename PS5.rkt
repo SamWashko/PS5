@@ -5,29 +5,32 @@
 (require racket/base)
 (define remove-duplicates
   (lambda ((lst <list>))
-    (foldl (lambda (x L)
+    (foldl (lambda ((x <list>) (L <list>))
              (cond ((member x L) L)
-                   (else (cons x L))))
+                   (else (append L (list x)))))
            '() lst)))
 (define cart
   (lambda ((A <list>) (B <list>))
     (letrec ((iter
-              (lambda (answer a)
-                     (cond ((null? a) answer)
+              (lambda ((answer <list>) (C <list>))
+                     (cond ((null? C) answer)
                            ((null? answer)
-                            (iter (map (lambda (b) (list (car a) b)) B) (cdr a)))
-                           (else (iter (append answer (map (lambda (b) (list (car a) b)) B))
-                               (cdr a)))))))
+                            (iter (map (lambda (b)
+                                         (list (car C) b)) B) (cdr C)))
+                           (else (iter (append answer
+                                               (map (lambda (b)
+                                                      (list (car C) b)) B))
+                                       (cdr C)))))))
       (remove-duplicates (iter '() A)))))
 
 ; Test Cases
 (define A '(1 2 3))
 (define B '(4 5 6))
-(cart A B) ;((3 6) (3 5) (3 4) (2 6) (2 5) (2 4) (1 6) (1 5) (1 4))
+(cart A B) ;((1 4) (1 5) (1 6) (2 4) (2 5) (2 6) (3 4) (3 5) (3 6))
 
 (define C '(7 8 7))
 (define D '(9 0 1))
-(cart C D) ;((8 1) (8 0) (8 9) (7 1) (7 0) (7 9))
+(cart C D) ;((7 9) (7 0) (7 1) (8 9) (8 0) (8 1))
 
 
 ; Part 2: Infinite Sets

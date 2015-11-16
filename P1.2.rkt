@@ -5,9 +5,10 @@
 ; Given a set S ⊂ A × B, fcn? returns #t when S represents a function,
 ; and #f when it does not.
 
+(require racket/base)
 (define fcn?
-  (lambda (S)
-    (letrec ((iter (lambda (s)
+  (lambda ((S <list>))
+    (letrec ((iter (lambda ((s <list>))
                      (cond ((null? s) #t)
                            ((foldr (lambda (a b) (or a b)) #f
                                    (map (lambda (coord)
