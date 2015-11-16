@@ -60,6 +60,10 @@
                          (stream-cons (list (stream-ref s1 x) (stream-ref s2 y))
                                       (iter (+ x 1) (- y 1) i))))))
       (iter 0 0 0))))
+(define stream-ref
+  (lambda ((S <stream>) (n <integer>))
+    (if (zero? n) (stream-first S)
+        (stream-ref (stream-rest S) (- n 1)))))
 
 ; Test Cases
 (define E (stream-cart integers integers))
