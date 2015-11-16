@@ -22,10 +22,5 @@
 (diag? d2)
 
 ; Part 2: Countably infinite sets
-; It isn't possible to write a function that determines whether a given set D of ordered pairs is a
-; diagonal set when that set is countably infinite. If such a function existed, it would need to be
-; able to run through an infinite number of items and check each one, then return true if and only
-; if each element satisfies the condition. Logically speaking, this is not possible for an infinite
-; set of numbers, and furthermore this would be akin to solving the Halting Problem for this set.
-; In other words, this function will never finish, and therefore this function will not perform as
-; intended.
+; For the same reason as problem 2 part 2, this function does not exist in Scheme when implemented
+; with streams. I'm gonna flesh out this exp tomorrow after office hours.
