@@ -36,4 +36,7 @@
 ; you can't have delayed evaluation. If there is duplicate that would mean the
 ; set is not representative of a function, a procedure would be able to find it,
 ; but if there is not, it would just run forever and never halt, as it would
-; never know for sure to return true unless it checked every element.
+; never know for sure to return true unless it checked every element. We could
+; reduce this to the halting problem, which we know to be unsolvable, because
+; we essentially want to know whether the function will halt with #f (when it
+; finds a duplicate) or runs forever (if there are not duplicates).
