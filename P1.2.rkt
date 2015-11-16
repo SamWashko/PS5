@@ -5,9 +5,6 @@
 ; Given a set S ⊂ A × B, fcn? returns #t when S represents a function,
 ; and #f when it does not.
 
-; Note: I'm not really sure if this is what they're looking for, also this
-; is inefficient, I just couldn't get a more efficient way to work
-
 (define fcn?
   (lambda (S)
     (letrec ((iter (lambda (s)
@@ -27,3 +24,15 @@
 (fcn? U) ;#f
 (define V '((a b) (b c) (b d)))
 (fcn? V) ;#f
+
+
+; Part 2
+
+; 2. Functions with Infinite Streams
+; It is not possible to check whether or not an inifinite set, represented by
+; a stream, is a function, because it would require checking every element to
+; see if there are duplicates in the leading values of the ordered pairs, so
+; you can't have delayed evaluation. If there is duplicate that would mean the
+; set is not representative of a function, a procedure would be able to find it,
+; but if there is not, it would just run forever and never halt, as it would
+; never know for sure to return true unless it checked every element.
