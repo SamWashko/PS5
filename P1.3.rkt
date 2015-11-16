@@ -2,14 +2,20 @@
 ; Given a Cartesian product A × B the projections π1 and π2 are π1 : A × B → A
 ; and π2 : A × B → B. If (a, b) ∈ A × B, we have π1(a, b) = a and π2(a, b) = b.
 ; Functions pi1 and pi2, given an argument set S ⊂ A×B, compute π1(S) and π2(S)
+(define remove-duplicates
+  (lambda (lst)
+    (foldl (lambda (x L)
+             (cond ((member x L) L)
+                   (else (cons x L))))
+           '() lst)))
 
 (define pi1
   (lambda (S)
-    (map car S)))
+    (remove-duplicates (map car S))))
 
 (define pi2
   (lambda (S)
-    (map cadr S)))
+    (remove-duplicates (map cadr S))))
 
 (define W '((1 2) (3 4) (5 6)))
 (pi1 W) ;(1 3 5)
@@ -33,7 +39,7 @@
                       (stream->listn (stream-rest s) (- n 1)))))))
 
 ; 3. Cartesian Product Projections with Infinite Sets
-; Given a Cartesian product A × B the projections π1 and π2 are π1 : A × B → A
+; Given an infinite Cartesian product A × B the projections are π1 : A × B → A
 ; and π2 : A × B → B. If (a, b) ∈ A × B, we have π1(a, b) = a and π2(a, b) = b.
 ; Functions pi1 and pi2, given an argument set S ⊂ A×B, compute π1(S) and π2(S)
 
